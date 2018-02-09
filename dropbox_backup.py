@@ -32,7 +32,6 @@ def dbBackup():
     pics = 0
     vids = 0
     others = 0
-    total = pics + vids + others
 
     for item in os.listdir(source_dir):
         if item not in exclude:
@@ -42,10 +41,12 @@ def dbBackup():
             elif '.mp4' in item:
                 vids += 1
             else:
-                other += 1
+                others += 1
 
             send2trash.send2trash(item)
             print(item + ': moved and deleted')
+
+    total = pics + vids + others
 
     end = time.time()
     print('Backup is complete. It took %s seconds' % round(end - start, 4))
